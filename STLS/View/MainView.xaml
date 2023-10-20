@@ -1,0 +1,188 @@
+﻿<Window x:Class="STLS.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:STLS"
+        xmlns:uc="clr-namespace:STLS.View.UserControls"
+        mc:Ignorable="d"
+        Title="Smart Traffic Light Simulator Project" Height="1000" Width="1200" WindowState="Normal" Background="ForestGreen">
+    <Window.Resources>
+        <StopStoryboard x:Key="CarAnimationStoryBoard">
+
+        </StopStoryboard>
+        <DoubleAnimation x:Key="AngleRotateTransformAnimationKey" Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"/>
+        <EventTrigger x:Key="CarOnMouseOverExampleTrigger" RoutedEvent="MouseEnter">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation From="0" 
+                                     To="-1000" 
+                                     Duration="00:00:01.500" 
+                                     Storyboard.TargetProperty="(Canvas.Top)"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        <DataTrigger x:Key="CarGoDataTrigger" Binding="{Binding IsGo}" Value="true">
+            <DataTrigger.EnterActions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation From="0" 
+                                     To="500" 
+                                     Duration="00:00:01.500" 
+                                     Storyboard.TargetProperty="(Canvas.Left)"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </DataTrigger.EnterActions>
+        </DataTrigger>
+        <DataTrigger x:Key="CarTrafficLightWarningDataTrigger" Binding="{Binding IsWarning}" Value="true">
+            <DataTrigger.EnterActions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        
+                    </Storyboard>
+                </BeginStoryboard>
+            </DataTrigger.EnterActions>
+        </DataTrigger>
+        <DataTrigger x:Key="CarStopDataTrigger" Binding="{Binding IsStop}" Value="true">
+            <DataTrigger.EnterActions>
+                <BeginStoryboard>
+                    <Storyboard>
+
+                    </Storyboard>
+                </BeginStoryboard>
+            </DataTrigger.EnterActions>
+        </DataTrigger>
+        <TransformGroup x:Key="RotateToRigthTransform">
+            <ScaleTransform/>
+            <SkewTransform/>
+            <RotateTransform Angle="32"/>
+            <TranslateTransform/>
+        </TransformGroup>
+    </Window.Resources>
+    <Grid>
+        <!--<Grid.Background>
+            <ImageBrush>
+                --><!--<Image Source="..\Assets\img\map.png"/>--><!--
+            </ImageBrush>
+        </Grid.Background>-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="0.01*"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition  Height="50"/>
+            <RowDefinition  Height="0.02*"/>
+            <RowDefinition  Height="50"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <!--<uc:TrafficLightControl Grid.Column="0"/>
+        <uc:Car1 Grid.Column="1"/>-->
+        <!--<Line Grid.ColumnSpan="2" Fill="White" StrokeThickness="200" FlowDirection="LeftToRight" VerticalAlignment="Center" Stroke ="AliceBlue"/>-->
+        
+        <Border Grid.Column="1" BorderThickness="5" Background="Wheat" BorderBrush="Gray">
+        </Border>
+        <Border Grid.Column="3" BorderThickness="5" Background="Wheat" BorderBrush="Gray">
+        </Border>
+        <Border Grid.Column="1" Grid.Row="4" BorderThickness="5" Background="Wheat" BorderBrush="Gray">
+        </Border>
+        <Border Grid.Column="3" Grid.Row="4" BorderThickness="5" Background="Wheat" BorderBrush="Gray">
+        </Border>
+
+        <!---->
+        <Border Grid.Row="1" Grid.RowSpan="3" BorderThickness="5" Background="Wheat" BorderBrush="Gray">
+        </Border>
+       <!--<StackPanel Grid.Row="2">-->
+        <Line Grid.Row="2" HorizontalAlignment="Stretch" StrokeDashArray="2 2" StrokeThickness="6" Stroke="Black" X2="1000" VerticalAlignment="Center"/>
+       <!--</StackPanel>-->
+        <Border Grid.Row="1" Grid.Column="4" Grid.RowSpan="3" BorderThickness="5" Background="Wheat" BorderBrush="Gray">
+        </Border>
+        <Line Grid.Row="2" Grid.Column="4" HorizontalAlignment="Stretch" StrokeDashArray="2 2" StrokeThickness="6" Stroke="Black" X2="1000" VerticalAlignment="Center"/>
+
+        <Border Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="3"
+                Background="Wheat" 
+                BorderBrush="Orange" BorderThickness="5">
+            <Canvas>
+            <Path Stroke="Orange" StrokeThickness="4" Data="M 0,0 L 275, 200" RenderTransformOrigin="0.5,0.5" Canvas.Left="0.37" Stretch="Fill" Canvas.Top="-0.092" Height="88.184" Width="92.26">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.364"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+                <Path Stroke="Orange" StrokeThickness="4" Data="M 0,0 L 275, 200" RenderTransformOrigin="0.5,0.5" Canvas.Left="-13.148" Stretch="Fill" Canvas.Top="13.204" Height="62.972" Width="119.748">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="108.895"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            </Canvas>
+        </Border>
+        <!--TRAFFIC LIGHT CONTROLS HERE-->
+        <uc:TrafficLightControlT x:Name="FromEastToWestOrNorthTF" DataContext="{Binding Path=TrafficLights[3]}" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+        <uc:TrafficLightControlL x:Name="FromNorthToSouthOrWestTF" Grid.Row="4" DataContext="{Binding Path=TrafficLights[2]}" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+        <uc:TrafficLightControlB x:Name="FromWestToEastOrSouthTF" Grid.Row="4" Grid.Column="4" DataContext="{Binding Path=TrafficLights[0]}" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <uc:TrafficLightControlR x:Name="FromSouthToNorthOrEastTF" Grid.Column="4" DataContext="{Binding Path=TrafficLights[1]}" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        <!--CARS HERE-->
+        <Canvas x:Name="ToNorthRoadCanvas" Grid.Row="1"/>
+        <Canvas x:Name="FromNorthRoadCanvas" Grid.Row="3">
+            <!--<uc:Car2 Height="24" Width="50"/>-->
+        </Canvas>
+        <Canvas x:Name="ToWestRoadCanvas" Grid.Row="4" Grid.Column="1"/>
+        <Canvas x:Name="FromWestRoadCanvas" Grid.Row="4" Grid.Column="3"/>
+        <Canvas x:Name="ToSouthRoadCanvas" Grid.Row="3" Grid.Column="4"/>
+        <Canvas x:Name="FromSouthRoadCanvas" Grid.Row="1" Grid.Column="4"/>
+        <Canvas x:Name="ToEastRoadCanvas" Grid.Row="0" Grid.Column="3"/>
+        <Canvas x:Name="FromEastRoadCanvas" Grid.Row="0" Grid.Column="1"/>
+        <Canvas x:Name="FromEastRoadCanvas2" Grid.Row="0" Grid.Column="1"/>
+
+        <!--Trail datagrid here-->
+
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="Trial1Button" Content="Trial 1" Margin="2"/>
+                <Button x:Name="Trial2Button" Content="Trial 2" Margin="2"/>
+                <Button x:Name="Trial3Button" Content="Trial 3" Margin="2"/>
+            </StackPanel>
+            <DataGrid Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      ItemsSource="{Binding SimulatorTrials}"
+                      AlternationCount="2"
+                      AlternatingRowBackground="LightGray">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Route" Binding="{Binding Route.Route}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Number Of Vehicles" Binding="{Binding NumberOfVehicle}"/>
+                    <DataGridTextColumn Header="Go (s)" Binding="{Binding Route.GoTicksInSeconds}"/>
+                    <DataGridTextColumn Header="Stop (s)" Binding="{Binding Route.StopTicksInSeconds}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button x:Name="StartSimulatorButton" HorizontalAlignment="Left" Margin="2">Start simulator!</Button>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding SmartTrafficActivated}"/>
+                <TextBlock Text=" Activate Smart Traffic"/>
+            </StackPanel>
+        </StackPanel>
+        <!--<Grid Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
+            <Grid.RowDefinitions>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Car Speed:"/>
+            <TextBox Grid.Column="1" Text="{Binding Car.Speed}"/>
+        </Grid>-->
+    </Grid>
+</Window>
